@@ -28,9 +28,9 @@ class Link {
   /// Returns the path used to access to this link.
   List<Link> get path {
     var mParent = parent;
-    var mPath = <Link>[];
+    var mPath = <Link>[this];
     while (mParent != null) {
-      // TODO: add actual implementation.
+      mPath.add(mParent);
     }
 
     return mPath;
