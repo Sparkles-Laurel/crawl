@@ -81,6 +81,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.6"
+  dart_bolt:
+    dependency: transitive
+    description:
+      name: dart_bolt
+      sha256: "60e71195a06f156bb033089f094d793fae271064378410c330235d8ec0bd9b59"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
+  dart_neo4j:
+    dependency: "direct main"
+    description:
+      name: dart_neo4j
+      sha256: "541144a25700b484f76e43c2b6cc86f2304f9e20c3a8853d0aadde78027fd04f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
+  dart_packstream:
+    dependency: transitive
+    description:
+      name: dart_packstream
+      sha256: "97edf120f2b3c026869c0fea8b7e2002fd3ce0aed1d27fcebd43dec91a7631b0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   file:
     dependency: transitive
     description:
