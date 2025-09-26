@@ -14,7 +14,7 @@ class Link {
   Link({required this.title, required this.href, this.parent});
 
   /// Returns the depth of this link.
-  int get depth {
+  num get depth {
     var mDepth = 0;
     var mParent = parent;
     while (mParent != null) {
