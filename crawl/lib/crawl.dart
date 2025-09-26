@@ -2,7 +2,6 @@
 /// through the web page and extract links.
 library;
 
-import 'dart:http' as http;
 import 'package:crawl/models/link.dart' as link;
 import 'package:crawl/globals.dart' as globals;
 import 'package:crawl/scrape.dart' as scrape;
