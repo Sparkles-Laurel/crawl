@@ -13,6 +13,9 @@ class Crawler {
   /// Pairs [link.Link]s against their depths.
   final Map<Page, int> linkList = <Page, int>{};
   /// The first [Uri] this [Crawler] will start from.
-  /// This [Uri] will have depth 0
+  /// This [Uri] will have depth 0.
   late Uri entryPoint = Uri.parse("https://kocaeli.edu.tr");
+
+  /// Creates a [Crawler] with an entrypoint.
+  Crawler.withEntryPoint(this.entryPoint);
 }
