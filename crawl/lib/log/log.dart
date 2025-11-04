@@ -4,7 +4,6 @@ library;
 import 'dart:developer' as developer;
 import 'dart:io' show Platform, stdout;
 
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:logging/logging.dart';
 
 class AppLogger {
@@ -34,8 +33,7 @@ class AppLogger {
 
       // Optionally mirror to stdout on desktop/server targets where developer.log
       // may not be visible depending on run configuration
-      if (!kIsWeb &&
-          (Platform.isLinux || Platform.isMacOS || Platform.isWindows)) {
+      if(Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
         stdout.writeln(message);
       }
     });
