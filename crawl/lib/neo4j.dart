@@ -5,7 +5,7 @@ import 'package:crawl/models/link.dart';
 import 'package:dart_neo4j/dart_neo4j.dart';
 
 Future<void> storeInNeo4j(Map<Link, num> map) async {
-  final driver = Neo4jDriver.create("localhost:7878");
+  final driver = Neo4jDriver.create("bolt://localhost:7878");
   late Session session;
   try {
     await driver.verifyConnectivity();
