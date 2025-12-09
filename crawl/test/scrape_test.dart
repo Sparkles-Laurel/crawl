@@ -1,7 +1,5 @@
-import 'package:crawl/crawl.dart';
 import 'package:crawl/models/link.dart';
 import 'package:crawl/scrape.dart';
-import 'package:path/path.dart';
 import 'package:test/test.dart' show test, expect;
 
 void main() {
