@@ -3,23 +3,30 @@ library;
 
 import 'dart:async';
 import 'dart:collection';
-import 'dart:convert';
-import 'dart:io';
 
 import 'package:crawl/models/link.dart';
 import 'package:crawl/scrape.dart' as scrape;
-import 'package:html/dom.dart';
-import 'package:crawl/num_extension.dart';
 import 'package:webdriver/async_io.dart';
 import 'package:crawl/webdriver_ext.dart';
 
+/// Crawls a given website
 class Crawler {
+  /// The starting point for crawling.
   final Uri entryPoint;
-  final int maxDepth;
-  final int maxPages;
-  late WebDriver driver;
 
+  /// The maximum depth the crawler should go.
+  final int maxDepth;
+
+  /// The maximum number of pages the crawler should gather.
+  final int maxPages;
+
+  /// Selenium driver.
+  late WebDriver _driver;
+
+  /// The list of links the crawler has collected and their depths.
   final Map<Link, num> linkList = <Link, num>{};
+
+  /// The set of links that were visited.
   final Set<Uri> visited = <Uri>{};
 
   Crawler.withEntryPoint(
@@ -30,7 +37,7 @@ class Crawler {
 
   Future<Map<Link, num>> crawl() async {
     // Make new crawler
-    driver = await createDriver();
+    _driver = await createDriver();
 
     final queue = ListQueue<Link>();
     queue.add(Link(title: "root", href: entryPoint));
@@ -46,11 +53,13 @@ class Crawler {
       if (depth > maxDepth) continue;
       try {
         // Start scraping the page
-        await driver.get(currentLink.href.toString());
+        await _driver.get(currentLink.href.toString());
         // Wait a little for the page to get built with JavaScript
-        await driver.waitFor(By.cssSelector("a"));
+        await _driver.waitFor(By.cssSelector("a"));
         // Gather the list of links on the page
-        final scraper = scrape.Scraper.fromDocumentString(await driver.pageSource);
+        final scraper = scrape.Scraper.fromDocumentString(
+          await _driver.pageSource,
+        );
         final links = scraper.collectLinks() ?? <Link>[];
         // Append the links to the queue
         queue.addAll(links);
@@ -59,7 +68,7 @@ class Crawler {
       }
     }
 
-    driver.quit();
+    _driver.quit();
     return linkList;
   }
 }
