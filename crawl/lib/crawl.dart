@@ -55,7 +55,10 @@ class Crawler {
         // Start scraping the page
         await _driver.get(currentLink.href.toString());
         // Wait a little for the page to get built with JavaScript
-        await _driver.waitFor(By.cssSelector("a"));
+        await _driver.waitFor(
+          pollInterval: Duration(seconds: 4),
+          By.cssSelector("a[href]"),
+        );
         // Gather the list of links on the page
         final scraper = scrape.Scraper.fromDocumentString(
           await _driver.pageSource,
