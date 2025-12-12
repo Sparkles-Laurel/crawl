@@ -4,10 +4,12 @@ library;
 import 'package:html/parser.dart' as html_parser;
 import 'package:html/dom.dart' as dom;
 import 'package:crawl/models/link.dart' show Link;
+
 /// Scraper for HTML pages to collect links.
 class Scraper {
   /// The string of the page to load.
   late String pageString;
+
   /// The page this scraper will scrape.
   late dom.Document page;
 
@@ -27,14 +29,14 @@ class Scraper {
   List<Link>? collectLinks() {
     var result = <Link>[];
 
-    final query = "a";
+    final query = "a[href]";
     final queryResults = page.body?.querySelectorAll(query) ?? <dom.Element>[];
     for (var element in queryResults) {
-      if(element.localName == "a") {
+      if (element.localName == "a") {
         final href = element.attributes.entries
-          .where((a) => a.key == "href")
-          .map((a) => a.value)
-          .single;
+            .where((a) => a.key == "href")
+            .map((a) => a.value)
+            .single;
         final title = element.text;
         final link = Link(title: title, href: Uri.parse(href));
 
@@ -42,5 +44,5 @@ class Scraper {
       }
     }
     return result;
-  } 
+  }
 }
