@@ -2,7 +2,7 @@ import 'package:webdriver/async_io.dart';
 
 /// Provides waiting extension for a webdriver.
 extension WebDriverWaits on WebDriver {
-  /// Waits until an element is present.
+  /// Waits until an element indicated by [by] is present within [timeout].
   Future<WebElement> waitFor(
     By by, {
     Duration timeout = const Duration(seconds: 10),

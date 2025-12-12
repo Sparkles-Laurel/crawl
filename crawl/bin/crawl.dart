@@ -3,13 +3,13 @@ import 'package:crawl/models/link.dart';
 import 'package:crawl/neo4j.dart' show storeInNeo4j;
 
 void main() async {
-  final entryPoint = Uri.parse('https://kocaeli.edu.tr');
+  final entryPoint = Uri.parse('https://www.kocaeli.edu.tr');
 
   // create the crawler with a depth limit and page limit
   final crawler = Crawler.withEntryPoint(
     entryPoint,
-    maxDepth: 3,
-    maxPages: 1000,
+    maxDepth: 300,
+    maxPages: 10000,
   );
 
   print('Starting crawl of $entryPoint...');
@@ -17,6 +17,5 @@ void main() async {
   print('Crawl finished. ${result.length} pages visited.');
 
   // you can now store `result` in Neo4j
-  await storeInNeo4j(result);
+  // await storeInNeo4j(result);
 }
-

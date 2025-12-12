@@ -1,7 +1,7 @@
 /// Provides a [Scraper] for web pages.
 library;
 
-import 'package:html/parser.dart' as html_parser;
+import 'package:html/parser.dart' as parser;
 import 'package:html/dom.dart' as dom;
 import 'package:crawl/models/link.dart' show Link;
 
@@ -15,7 +15,7 @@ class Scraper {
 
   /// Initializes a [Scraper] from a page string.
   Scraper.fromDocumentString(this.pageString) {
-    page = html_parser.parse(pageString);
+    page = parser.parse(pageString);
   }
 
   /// Initializes a [Scraper] from a [dom.Document]
@@ -33,6 +33,8 @@ class Scraper {
     final queryResults = page.body?.querySelectorAll(query) ?? <dom.Element>[];
     for (var element in queryResults) {
       if (element.localName == "a") {
+        // if a link has more than one href attributes that link has problems
+        // more serious than causing Iterable.single to fail
         final href = element.attributes.entries
             .where((a) => a.key == "href")
             .map((a) => a.value)
