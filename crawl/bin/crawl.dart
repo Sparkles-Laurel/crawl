@@ -17,5 +17,5 @@ void main() async {
   print('Crawl finished. ${result.length} pages visited.');
 
   // you can now store `result` in Neo4j
-  // await storeInNeo4j(result);
+  await storeInNeo4j(result);
 }
